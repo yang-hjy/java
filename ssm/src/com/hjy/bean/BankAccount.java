@@ -41,6 +41,43 @@ public class BankAccount {
 		this.acc_money = acc_money;
 	}
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(acc_money);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((acc_no == null) ? 0 : acc_no.hashCode());
+		result = prime * result + ((acc_password == null) ? 0 : acc_password.hashCode());
+		result = prime * result + id;
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BankAccount other = (BankAccount) obj;
+		if (Double.doubleToLongBits(acc_money) != Double.doubleToLongBits(other.acc_money))
+			return false;
+		if (acc_no == null) {
+			if (other.acc_no != null)
+				return false;
+		} else if (!acc_no.equals(other.acc_no))
+			return false;
+		if (acc_password == null) {
+			if (other.acc_password != null)
+				return false;
+		} else if (!acc_password.equals(other.acc_password))
+			return false;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+	@Override
 	public String toString() {
 		return "BankAccount [id=" + id + ", acc_no=" + acc_no + ", acc_password=" + acc_password + ", acc_money="
 				+ acc_money + "]";
